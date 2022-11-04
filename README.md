@@ -4,7 +4,7 @@
 
 ### lab11
 
-[Render link](https://f2wb67prasadam.onrender.com/)
+[Render link](https://f2db67prasadam.onrender.com)
 
 class : gadgets.<br>
 gadgets attributes: gadget type, gadget price, 
