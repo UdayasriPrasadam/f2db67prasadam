@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  p Udayasri Prasadam
+  
+  button(type="button",onclick="doBump()" class="btn btn-danger") Press Me
+
+  div(id="bump") Bump the count
+  script.
+    var count=0;
+    var bump=1;
+    function doBump() {
+      count = count+bump;
+      bump++;
+      document.getElementById("bump").innerHTML=`Count ${count} with bump ${bump}`
+    }
+  a(href="/gadgets") go to gadgets
