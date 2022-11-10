@@ -5,7 +5,8 @@ var mongoose = require('mongoose')
 var mongodb = require('mongodb')
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var gadgets = require("./models/gadgets");
+var tennis = require("./models/tennis");
+
 require('dotenv').config();
 const connectionString =
   process.env.MONGO_CON
@@ -25,7 +26,7 @@ db.once("open", function () {
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var gadgetsRouter = require('./routes/gadgets');
+var tennisRouter = require('./routes/tennis');
 var gridbuildRouter = require('./routes/gridbuild');
 var selectorRouter = require('./routes/selector');
 
@@ -39,11 +40,12 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname,'public')));
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/gadgets', gadgetsRouter);
+app.use('/tennis', tennisRouter);
 app.use('/gridbuild', gridbuildRouter);
 app.use('/selector', selectorRouter);
 
@@ -62,38 +64,39 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-// We can seed the collection if needed on server start
 async function recreateDB(){
   // Delete everything
-    await gadgets.deleteMany();  
+  await tennis.deleteMany();
+
     let instance1 = new
-    gadgets({
-      gadget_type:"Laptop",gadget_price:"2000.00",gadget_version:"10"
+    tennis({
+      gadget_type:"Television",gadget_price :2000.00,gadget_version:4
     });
     instance1.save( function(err,doc) {
         if(err) return console.error(err);
         console.log("First object saved")
       });
-      await gadgets.deleteMany();  
-    let instance2 = new
-    gadgets({
-      gadget_type:"Mobile",gadget_price:"1000.00",gadget_version:"Galaxy Tab S8"
+
+      let instance2 = new
+    tennis({
+      gadget_type:"Phone",gadget_price :5000.00,gadget_version:3
+    
     });
     instance2.save( function(err,doc) {
         if(err) return console.error(err);
         console.log("Second object saved")
       });
-      await gadgets.deleteMany();  
-    let instance3 = new
-    gadgets({
-      gadget_type:"Television",gadget_price:"3000.00",gadget_version:"Samsung S95B OLED"
+
+      let instance3 = new
+    tennis({
+      gadget_type:"Tablet",gadget_price :7000,gadget_version:6
     });
     instance3.save( function(err,doc) {
         if(err) return console.error(err);
         console.log("Third object saved")
       });
-
   }
   let reseed = true;
   if (reseed) { recreateDB();}
+
 module.exports = app;
