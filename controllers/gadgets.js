@@ -137,3 +137,16 @@ exports.gadgets_delete_Page = async function(req, res) {
         res.send(`{'error': '${err}'}`);
     }
 };
+
+// VIEWS 
+// Handle a show all view 
+exports.costume_view_all_Page = async function(req, res) { 
+    try{ 
+        thegadgetss = await gadget.find(); 
+        res.render('gadgetss', { title: 'Costume Search Results', results: thegadgetss }); 
+    } 
+    catch(err){ 
+        res.status(500); 
+        res.send(`{"error": ${err}}`); 
+    }   
+}; 
