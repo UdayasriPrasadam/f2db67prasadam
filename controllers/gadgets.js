@@ -24,17 +24,19 @@ exports.gadgets_detail = async function (req, res) {
 
 exports.gadgets_create_post = async function (req, res) {
     console.log(req.body)
-    let document = new gadgets();
-    document.Gadgets_Name = req.body.Gadgets_Name;
-    document.Gadgets_Location = req.body.University_Location;
-    document.Number_of_Courses_Offered = req.body.Number_of_Courses_Offered;
     try {
+        let document = new gadgets();
+        
+        document.gadget_type = req.body.gadget_type;
+        document.gadget_price = req.body.gadget_price;
+        document.gadget_version = req.body.gadget_version;
+
         let result = await document.save();
         res.send(result);
-    }
-    catch (err) {
+    } catch (err) {
+        // console.log(err);
+        res.send(err)
         res.status(500);
-        res.send(`{"error": ${err}}`);
     }
 };
 
@@ -57,9 +59,9 @@ exports.gadgets_update_put = async function (req, res) {
     try {
         let toUpdate = await gadgets.findById(req.params.id)
         // Do updates of properties
-        if (req.body.Gadgets_Name) toUpdate.Gadgets_Name = req.body.Gadgets_Name;
-        if (req.body.Gadgets_Location) toUpdate.Gadgets_Location = req.body.Gadgets_Location;
-        if (req.body.Number_of_Courses_Offered) toUpdate.Number_of_Courses_Offered = req.body.Number_of_Courses_Offered;
+        if (req.body.gadget_type) toUpdate.gadget_type = req.body.gadget_type;
+        if (req.body.gadget_type) toUpdate.gadget_price = req.body.gadget_price;
+        if (req.body.gadget_version) toUpdate.gadget_version = req.body.gadget_version;
         let result = await toUpdate.save();
         console.log("Sucess " + result)
         res.send(result)
@@ -74,7 +76,7 @@ exports.gadgets_update_put = async function (req, res) {
 // Handle a show all view
 exports.gadgets_view_all_Page = async function (req, res) {
     try {
-        thezoos = await gadgets.find();
+        theGadgets = await gadgets.find();
         res.render('gadgets', { title: 'gadgets Search Results', results: theGadgets });
     }
     catch (err) {
@@ -129,7 +131,7 @@ exports.gadgets_update_Page =  async function(req, res) {
 exports.gadgets_delete_Page = async function(req, res) {
     console.log("Delete view for id "  + req.query.id)
     try{
-        result = await zoo.findById(req.query.id)
+        result = await gadgets.findById(req.query.id)
         res.render('gadgetsdelete', { title: 'Gadgets Delete', toShow: result });
     }
     catch(err){
