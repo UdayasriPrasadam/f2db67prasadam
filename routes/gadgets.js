@@ -3,5 +3,5 @@ const gadgets_controlers= require('../controllers/gadgets');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', gadgets_controlers.gadgets_view_all_Page );
+router.get('/', gadgets_controllers.gadgets_view_all_Page );
 module.exports = router;
