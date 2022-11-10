@@ -3,6 +3,23 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var gadgets = require("./models/gadgets");
+require('dotenv').config();
+const connectionString =
+  process.env.MONGO_CON
+mongoose = require('mongoose');
+mongoose.connect(connectionString,
+{
+   useNewUrlParser: true,
+   useUnifiedTopology: true
+  });
+
+var db = mongoose.connection;
+//Bind connection to error event
+db.on('error', console.error.bind(console, 'MongoDB connectionerror:'));
+db.once("open", function () {
+  console.log("Connection to DB succeeded")
+});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -43,5 +60,38 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+// We can seed the collection if needed on server start
+async function recreateDB(){
+  // Delete everything
+    await gadgets.deleteMany();  
+    let instance1 = new
+    gadgets({
+      gadget_type:"Laptop",gadget_price:"2000.00",gadget_version:"10"
+    });
+    instance1.save( function(err,doc) {
+        if(err) return console.error(err);
+        console.log("First object saved")
+      });
+      await gadgets.deleteMany();  
+    let instance2 = new
+    gadgets({
+      gadget_type:"Mobile",gadget_price:"1000.00",gadget_version:"Galaxy Tab S8"
+    });
+    instance2.save( function(err,doc) {
+        if(err) return console.error(err);
+        console.log("Second object saved")
+      });
+      await gadgets.deleteMany();  
+    let instance3 = new
+    gadgets({
+      gadget_type:"Television",gadget_price:"3000.00",gadget_version:"Samsung S95B OLED"
+    });
+    instance3.save( function(err,doc) {
+        if(err) return console.error(err);
+        console.log("Third object saved")
+      });
 
+  }
+  let reseed = true;
+  if (reseed) { recreateDB();}
 module.exports = app;
