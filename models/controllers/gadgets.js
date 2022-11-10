@@ -1,4 +1,4 @@
-var gadgets = require('../models/university');
+var gadgets = require('../models/gadget');
 // List of all university
 exports.gadgets_list = async function(req, res) {
     try{
