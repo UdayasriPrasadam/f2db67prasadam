@@ -5,7 +5,7 @@ var mongoose = require('mongoose')
 var mongodb = require('mongodb')
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var tennis = require("./models/tennis");
+var gadgets = require("./models/gadgets");
 
 require('dotenv').config();
 const connectionString =
@@ -26,9 +26,10 @@ db.once("open", function () {
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var tennisRouter = require('./routes/tennis');
+var gadgetsRouter = require('./routes/gadgets');
 var gridbuildRouter = require('./routes/gridbuild');
 var selectorRouter = require('./routes/selector');
+var resourceRouter = require('./routes/resource');
 
 var app = express();
 
@@ -45,9 +46,10 @@ app.use(express.static(path.join(__dirname,'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/tennis', tennisRouter);
+app.use('/gadgets', gadgetsRouter);
 app.use('/gridbuild', gridbuildRouter);
 app.use('/selector', selectorRouter);
+app.use('/resource', resourceRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -66,11 +68,11 @@ app.use(function(err, req, res, next) {
 });
 async function recreateDB(){
   // Delete everything
-  await tennis.deleteMany();
+  await gadgets.deleteMany();
 
     let instance1 = new
-    tennis({
-      gadget_type:"Television",gadget_price :2000.00,gadget_version:4
+    gadgets({
+      gadget_type:"Television",gadget_price :2000.00,gadget_version:"Samsung S95B OLED"
     });
     instance1.save( function(err,doc) {
         if(err) return console.error(err);
@@ -78,8 +80,8 @@ async function recreateDB(){
       });
 
       let instance2 = new
-    tennis({
-      gadget_type:"Phone",gadget_price :5000.00,gadget_version:3
+    gadgets({
+      gadget_type:"Phone",gadget_price :5000.00,gadget_version:"Apple 13 pro"
     
     });
     instance2.save( function(err,doc) {
@@ -88,8 +90,8 @@ async function recreateDB(){
       });
 
       let instance3 = new
-    tennis({
-      gadget_type:"Tablet",gadget_price :7000,gadget_version:6
+    gadgets({
+      gadget_type:"Tablet",gadget_price :7000,gadget_version:"iPAD 12"
     });
     instance3.save( function(err,doc) {
         if(err) return console.error(err);
