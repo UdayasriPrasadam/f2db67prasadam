@@ -60,7 +60,7 @@ exports.gadgets_update_put = async function (req, res) {
         let toUpdate = await gadgets.findById(req.params.id)
         // Do updates of properties
         if (req.body.gadget_type) toUpdate.gadget_type = req.body.gadget_type;
-        if (req.body.gadget_type) toUpdate.gadget_price = req.body.gadget_price;
+        if (req.body.gadget_price) toUpdate.gadget_price = req.body.gadget_price;
         if (req.body.gadget_version) toUpdate.gadget_version = req.body.gadget_version;
         let result = await toUpdate.save();
         console.log("Sucess " + result)
