@@ -3,7 +3,7 @@ extends layout
 block content
   h1= title
 
-  form(id='gadgetsForm', action="/resource/gadgetss/", method="POST")
+  form(id='gadgetsForm', action="/resource/gadgets", method="POST")
     div.form-group
         label.gadgetsAttr(for='gadget_type') gadgets type
         input#gadgettype(type='text', name='gadget_type')
