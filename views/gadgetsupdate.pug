@@ -2,11 +2,10 @@ extends layout
 
 block content
   h1= title
-
-    - let gadgetsid = toShow._id
-    - let gadgettype = toShow.gadget_type
-    - let gadgetprice = toShow.gadget_price
-    - let gadgetversion = toShow.gadget_version
+  - let gadgetsid = toShow._id
+  - let gadgettype = toShow.gadget_type
+  - let gadgetprice = toShow.gadget_price
+  - let gadgetversion = toShow.gadget_version
 
     div.row(class='mb-2')
       div.mr-1 ID is
