@@ -2,7 +2,25 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+.gadgetsAttr { 
+  background-color:darkmagenta; 
+  color:aqua;
+  width : 200px; 
+  font-family: 'Times New Roman', Times, serif;
+  font-size: medium;
+  text-align: center;
+  font-style: italic;
 
+}
+h1 {
+    color: magenta;
+    background-color: chartreuse;
+    font-size:xx-large;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    font-style: italic;
+}
 a {
   color: #00B7FF;
 }
+
