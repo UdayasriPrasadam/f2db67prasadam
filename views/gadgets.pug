@@ -3,7 +3,7 @@ extends layout
 block content 
     h1= title
     div.container-fluid
-    button.btn( class="btn-secondary ml-1", onclick = destination) Create
+        button.btn( class="btn-secondary ml-1", onclick = destination) Create
         div(class ="row m-1")
             each item, index in results
                 - let destination = `dispatch(\"/gadgets/update?id=${item._id}\")`
