@@ -1,11 +1,10 @@
 const mongoose = require("mongoose")
 const gadgetsSchema = mongoose.Schema({
-gadget_type: String,
+gadget_type:  {
+    type: String,
+    required: [true, "Name required"]
+},
 gadget_version: String,
-gadget_price: {
-    type: Number,
-    min: [100, "Min value is 100"],
-    max: [10000, "Max value is 5000"]
-}
+gadget_price: Number
 })
 module.exports = mongoose.model("gadgets", gadgetsSchema)
