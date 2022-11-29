@@ -1,20 +1,33 @@
-extends layout
+//- extends layout
 
-block content
-  h1= title
-  p Welcome to #{title}
+//- block content
+//- h1= title
+//- p Welcome to #{title}
 
-  p Udayasri Prasadam
+//- p Udayasri Prasadam
   
-  button(type="button",onclick="doBump()" class="btn btn-danger") Press Me
+//- button(type="button",onclick="doBump()" class="btn btn-danger") Press Me
 
-  div(id="bump") Bump the count
-  script.
-    var count=0;
-    var bump=1;
-    function doBump() {
-      count = count+bump;
-      bump++;
-      document.getElementById("bump").innerHTML=`Count ${count} with bump ${bump}`
-    }
-  a(href="/gadgets") go to gadgets
+//- div(id="bump") Bump the count
+//- script.
+ //-  var count=0;
+//- var bump=1;
+//-  function doBump() {
+   //-   count = count+bump;
+   //-   bump++;
+   //-   document.getElementById("bump").innerHTML=`Count ${count} with bump ${bump}`
+//-    }
+ //- a(href="/gadgets") go to gadgets
+
+
+extends layout
+block content
+    if (!user)
+      a(href="/login") Login
+      br
+      a(href="/register") Register
+    if (user)
+      p You are currently logged in as #{user.username}
+      a(href="/gadgets") Take me to gadgets
+      br
+      a(href="/logout") Logout
