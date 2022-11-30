@@ -3,16 +3,16 @@ extends layout
 block content
   h1= title
 
-  form(id='gadgetsForm', action="/resource/gadgets", method="POST")
+  form(id='gadgetsForm', action="/resource/gadgets/", method="POST")
     div.form-group
         label.gadgetsAttr(for='gadget_type') gadgets type
         input#gadget_type(type='text', name='gadget_type')
     div.form-group
-        label.gadgetsAttr(for='gadget_price') gadgets price
-        input#gadget_version(type='number', name='gadget_price')
-    div.form-group
         label.gadgetsAttr(for='gadget_version') gadgets version
         input#gadget_version(type='text', name='gadget_version')
+    div.form-group
+        label.gadgetsAttr(for='gadget_price') gadgets price
+        input#gadget_price(type='number', name='gadget_price')
     input(type="submit" class = "btn btn-primary")
 
     script.
@@ -23,8 +23,9 @@ block content
           method: 'POST',
           body: new URLSearchParams(new FormData(event.target)) // event.target is the form
         }).then((resp) => {
+          console.log(resp,"hello")
           return resp.json(); // or resp.text() or whatever the server sends
-        }).then((resp) => {
+        }).then((body) => {
           alert("Save succeded")
           // TODO handle body
         }).catch((error) => {

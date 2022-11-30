@@ -3,17 +3,20 @@ extends layout
 block content 
     h1= title
     div.container-fluid
-        button.btn( class="btn-secondary ml-1", onclick = destination) Create
+        - let destn1 = `dispatch(\"/gadgets/create")`
+        button.btn( class="btn-secondary ml-1", onclick = destn1) Create
         div(class ="row m-1")
             each item, index in results
+                - let destn2 = `dispatch(\"/gadgets/delete?id=${item._id}\")`
+                - let destn3 = `dispatch(\"/gadgets/detail?id=${item._id}\")`
                 - let destination = `dispatch(\"/gadgets/update?id=${item._id}\")`
                 div.col-sm-2(onclick=`buy(${index})`) #{item["gadget_type"]}, #{item["gadget_price"]}, #{item["gadget_version"]}
                     br
                     button.btn( class="btn-primary ml-1", onclick= destination) Update
                     br
-                    button.btn( class="btn-danger ml-1", onclick= destination) Delete
+                    button.btn( class="btn-danger ml-1", onclick= destn2) Delete
                     br
-                    button.btn( class="btn-success ml-1", onclick= destination) Details
+                    button.btn( class="btn-success ml-1", onclick= destn3) Details
 
     script. 
         function dispatch(path) {

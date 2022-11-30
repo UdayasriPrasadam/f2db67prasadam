@@ -32,7 +32,7 @@ block content
     script.
         function cancel() {
             // Go back to the home page for the gadgets collection
-            window.location.href='/resource/gadgetss'
+            window.location.href='/gadgets'
         }
     script.
         function deleteOnid() {
@@ -44,7 +44,7 @@ block content
                 return resp.json(); // or resp.text() or whatever the server sends
             }).then((body) => {
                 alert("Delete succeded")
-                window.location.href='/resource/gadgetss'
+                window.location.href='/gadgets'
                 // TODO handle body
             }).catch((error) => {
                 // TODO handle error
