@@ -6,13 +6,13 @@ block content
   form(id='gadgetsForm', action="/resource/gadgets", method="POST")
     div.form-group
         label.gadgetsAttr(for='gadget_type') gadgets type
-        input#gadgettype(type='text', name='gadget_type')
+        input#gadget_type(type='text', name='gadget_type')
     div.form-group
         label.gadgetsAttr(for='gadget_price') gadgets price
-        input#gadgetprice(type='number', name='gadget_price')
+        input#gadget_version(type='number', name='gadget_price')
     div.form-group
         label.gadgetsAttr(for='gadget_version') gadgets version
-        input#gadgetversion(type='text', name='gadget_version')
+        input#gadget_version(type='text', name='gadget_version')
     input(type="submit" class = "btn btn-primary")
 
     script.
@@ -24,7 +24,7 @@ block content
           body: new URLSearchParams(new FormData(event.target)) // event.target is the form
         }).then((resp) => {
           return resp.json(); // or resp.text() or whatever the server sends
-        }).then((body) => {
+        }).then((resp) => {
           alert("Save succeded")
           // TODO handle body
         }).catch((error) => {
