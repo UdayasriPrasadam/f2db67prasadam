@@ -7,7 +7,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var gadgets = require("./models/gadgets");
 
 passport.use(new LocalStrategy(
   function (username, password, done) {
@@ -54,6 +53,7 @@ var gadgetsRouter = require('./routes/gadgets');
 var gridbuildRouter = require('./routes/gridbuild');
 var selectorRouter = require('./routes/selector');
 var resourceRouter = require('./routes/resource');
+const gadgets = require('./models/gadgets');
 
 var app = express();
 
@@ -74,13 +74,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname,'public')));
 
-
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/gadgets', gadgetsRouter);
 app.use('/gridbuild', gridbuildRouter);
 app.use('/selector', selectorRouter);
 app.use('/resource', resourceRouter);
+
 var Account =require('./models/account');
 passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
@@ -101,8 +101,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 async function recreateDB(){
-  // Delete everything
   await gadgets.deleteMany();
 
     let instance1 = new
@@ -135,5 +135,5 @@ async function recreateDB(){
   }
   let reseed = true;
   if (reseed) { recreateDB();}
-
+  
 module.exports = app;

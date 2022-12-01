@@ -3,33 +3,36 @@ extends layout
 block content
   h1= title
 
-  form(id='gadgetsForm', action="/resource/gadgets/", method="POST")
+  form(id='gadgetsForm', action="/resource/gadgetss/", method="POST")
+    br
     div.form-group
-        label.gadgetsAttr(for='gadget_type') gadgets type
-        input#gadget_type(type='text', name='gadget_type')
+        label.gadgetsAttr(for='gadget_type') gadget type
+        input#gadgettype(type='text', name='gadget_type')
+    br
     div.form-group
-        label.gadgetsAttr(for='gadget_version') gadgets version
-        input#gadget_version(type='text', name='gadget_version')
+        label.gadgetsAttr(for='gadget_versionn') gadget version
+        input#gadgetversion(type='text', name='gadget_version')
+    br
     div.form-group
-        label.gadgetsAttr(for='gadget_price') gadgets price
-        input#gadget_price(type='number', name='gadget_price')
-    input(type="submit" class = "btn btn-primary")
+        label.gadgetsAttr(for='gadget_price') gadget price
+        input#gadgetprice(type='number', name='gadget_price')
+    br
+    input(type="submit" class="btn btn-danger")
 
-    script.
-      document.forms['gadgetsForm'].addEventListener('submit', (event) => {
-        event.preventDefault();
-        // TODO do something here to show user that form is being submitted
-        fetch(event.target.action, {
-          method: 'POST',
-          body: new URLSearchParams(new FormData(event.target)) // event.target is the form
-        }).then((resp) => {
-          console.log(resp,"hello")
-          return resp.json(); // or resp.text() or whatever the server sends
-        }).then((body) => {
-          alert("Save succeded")
-          // TODO handle body
-        }).catch((error) => {
+  script.
+    document.forms['gadgetsForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+      fetch(event.target.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Save succeded")
+        // TODO handle body
+      }).catch((error) => {
         // TODO handle error
-          alert("Save failed " + error )
-       });
+        alert("Save failed " + error )
       });
+    });

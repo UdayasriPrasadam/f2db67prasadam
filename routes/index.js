@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
 
 module.exports = router;*/
 
+
 var express = require('express');
 var passport = require('passport');
 var router = express.Router();
@@ -77,6 +78,7 @@ router.post('/login', passport.authenticate('local'), function (req, res) {
     res.redirect(req.session.returnTo);
   res.redirect('/');
 });
+
 router.get('/logout', function(req, res, next) {          // use post or delete for better safety
   req.logout( function(err) {
       if (err) { return next(err);}

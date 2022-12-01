@@ -1,15 +1,16 @@
 var gadgets = require('../models/gadgets');
-// List of all gadgets
-exports.gadgets_list = async function(req, res) {
-    try{
-    theGadgets = await gadgets.find();
-    res.send(theGadgetss);
+// List of all gadgetss
+exports.gadgets_list = async function (req, res) {
+    try {
+        thegadgetss = await gadgets.find();
+        res.send(thegadgetss);
     }
-    catch(err){
-    res.status(500);
-    res.send(`{"error": ${err}}`);
+    catch (err) {
+        res.status(500);
+        res.send(`{"error": ${err}}`);
     }
 };
+// for a specific gadgets.
 exports.gadgets_detail = async function (req, res) {
     console.log("detail" + req.params.id)
     try {
@@ -24,17 +25,19 @@ exports.gadgets_detail = async function (req, res) {
 
 exports.gadgets_create_post = async function (req, res) {
     console.log(req.body)
-    
-        let document = new gadgets();
-        document.gadget_type = req.body.gadget_type;
-        document.gadget_version = req.body.gadget_version;
-        document.gadget_price = req.body.gadget_price;
-        
-     try{   
+    let document = new gadgets();
+    // We are looking for a body, since POST does not have query parameters.
+    // Even though bodies can be in many different formats, we will be picky
+    // and require that it be a json object
+    // {"gadgetstype":"goat", "cost":12, "size":"large"}
+    document.gadget_type = req.body.gadget_type;
+    document.gadget_version = req.body.gadget_version;
+    document.gadget_price = req.body.gadget_price;
+    try {
         let result = await document.save();
         res.send(result);
-    } catch (err) {
-        // console.log(err);      
+    }
+    catch (err) {
         res.status(500);
         res.send(`{"error": ${err}}`);
     }
@@ -76,8 +79,8 @@ exports.gadgets_update_put = async function (req, res) {
 // Handle a show all view
 exports.gadgets_view_all_Page = async function (req, res) {
     try {
-        theGadgets = await gadgets.find();
-        res.render('gadgets', { title: 'gadgets Search Results', results: theGadgets });
+        thegadgets = await gadgets.find();
+        res.render('gadgets', { title: 'gadgets Search Results', results: thegadgets });
     }
     catch (err) {
         res.status(500);
@@ -99,13 +102,13 @@ exports.gadgets_view_one_Page = async function (req, res) {
     }
 };
 
-// Handle building the view for creating a zoo.
+// Handle building the view for creating a gadgets.
 // No body, no in path parameter, no query.
 // Does not need to be async
 exports.gadgets_create_Page =  function(req, res) {
     console.log("create view")
     try{
-        res.render('gadgetscreate', { title: 'Gadgets Create'});
+        res.render('gadgetscreate', { title: 'gadgets Create'});
     }
     catch(err){
         res.status(500)
@@ -113,13 +116,13 @@ exports.gadgets_create_Page =  function(req, res) {
     }
 };
 
-// Handle building the view for updating a zoo.
+// Handle building the view for updating a gadgets.
 // query provides the id
 exports.gadgets_update_Page =  async function(req, res) {
     console.log("update view for item "+req.query.id)
     try{
         let result = await gadgets.findById(req.query.id)
-        res.render('gadgetsupdate', { title: 'Gadgets Update', toShow: result });
+        res.render('gadgetsupdate', { title: 'gadgets Update', toShow: result });
     }
     catch(err){
         res.status(500)
@@ -132,23 +135,10 @@ exports.gadgets_delete_Page = async function(req, res) {
     console.log("Delete view for id "  + req.query.id)
     try{
         result = await gadgets.findById(req.query.id)
-        res.render('gadgetsdelete', { title: 'Gadgets Delete', toShow: result });
+        res.render('gadgetsdelete', { title: 'gadgets Delete', toShow: result });
     }
     catch(err){
         res.status(500)
         res.send(`{'error': '${err}'}`);
     }
 };
-
-// VIEWS 
-// Handle a show all view 
-exports.gadgets_view_all_Page = async function(req, res) { 
-    try{ 
-        thegadgetss = await gadget.find(); 
-        res.render('gadgets', { title: 'gadgets Search Results', results: thegadgetss }); 
-    } 
-    catch(err){ 
-        res.status(500); 
-        res.send(`{"error": ${err}}`); 
-    }   
-}; 
