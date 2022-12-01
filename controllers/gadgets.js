@@ -1,4 +1,5 @@
 var gadgets = require('../models/gadgets');
+
 // List of all university
 exports.gadgets_list = async function(req, res) {
     try{
@@ -145,7 +146,7 @@ exports.gadgets_delete_Page = async function(req, res) {
 exports.gadgets_view_all_Page = async function(req, res) { 
     try{ 
         thegadgetss = await gadget.find(); 
-        res.render('gadgetss', { title: 'gadgetss Search Results', results: thegadgetss }); 
+        res.render('gadgetss', { title: 'gadgets Search Results', results: thegadgetss }); 
     } 
     catch(err){ 
         res.status(500); 
