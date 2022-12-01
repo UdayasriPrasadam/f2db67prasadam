@@ -1,9 +1,9 @@
 var gadgets = require('../models/gadgets');
-// List of all university
+// List of all gadgets
 exports.gadgets_list = async function(req, res) {
     try{
     theGadgets = await gadgets.find();
-    res.send(theGadgets);
+    res.send(theGadgetss);
     }
     catch(err){
     res.status(500);
@@ -20,7 +20,7 @@ exports.gadgets_detail = async function (req, res) {
         res.send(`{"error": document for id ${req.params.id} not found`);
     }
 };
-// Handle university create on POST.
+// Handle gadgets create on POST.
 
 exports.gadgets_create_post = async function (req, res) {
     console.log(req.body)
@@ -40,7 +40,7 @@ exports.gadgets_create_post = async function (req, res) {
     }
 };
 
-// Handle university delete form on DELETE.
+// Handle gadgets delete form on DELETE.
 exports.gadgets_delete = async function (req, res) {
     console.log("delete " + req.params.id)
     try {
@@ -53,7 +53,7 @@ exports.gadgets_delete = async function (req, res) {
     }
 };
 
-// Handle university update form on PUT.
+// Handle gadgets update form on PUT.
 exports.gadgets_update_put = async function (req, res) {
     console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`)
     try {

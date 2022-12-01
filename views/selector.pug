@@ -3,7 +3,8 @@ extends layout
 block content
     h1= title
     p Welcome to #{title} js
-    br       
+    br  
+         
     - var imageName= ["imag.jpg","imag1.jpg","imag2.jpg","imag3.jpg","imag4.jpg"]            
         -for(let i=0;i<3;i++){
             - let r=Math.floor(Math.random()*5)
