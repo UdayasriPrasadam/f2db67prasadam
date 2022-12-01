@@ -142,10 +142,10 @@ exports.gadgets_delete_Page = async function(req, res) {
 
 // VIEWS 
 // Handle a show all view 
-exports.costume_view_all_Page = async function(req, res) { 
+exports.gadgets_view_all_Page = async function(req, res) { 
     try{ 
         thegadgetss = await gadget.find(); 
-        res.render('gadgetss', { title: 'Costume Search Results', results: thegadgetss }); 
+        res.render('gadgetss', { title: 'gadgetss Search Results', results: thegadgetss }); 
     } 
     catch(err){ 
         res.status(500); 
